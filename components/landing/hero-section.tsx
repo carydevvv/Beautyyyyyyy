@@ -228,17 +228,17 @@ export function HeroSection() {
       </section>
 
       {/* Testimonials */}
-      <section className="container mx-auto px-4 py-16 bg-white/50 rounded-2xl mx-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-white/50 rounded-2xl">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 px-2">
             Join hundreds of satisfied clients who trust us with their nail
             care.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="text-center">
               <CardHeader>
