@@ -167,10 +167,11 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
       await addDoc(collection(db, "bookings"), bookingData);
 
       // Create notification for admin (using correct admin UID)
+      const serviceNames = selectedServicesData.map((s) => s.name).join(", ");
       await createNotification(
         "VJdxemjpYTfR3TAfAQDmZ9ucjxB2", // Admin UID from useAdminAuth
         "New Booking Request",
-        `${clientProfile.displayName} requested ${selectedServiceData?.name} with ${selectedStylistData?.name}`,
+        `${clientProfile.displayName} requested ${serviceNames} with ${selectedStylistData?.name}`,
         "booking",
         bookingData,
       );
@@ -179,7 +180,7 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
       await createNotification(
         clientProfile.uid,
         "Booking Submitted",
-        `Your booking request for ${selectedServiceData?.name} has been submitted and is pending confirmation.`,
+        `Your booking request for ${serviceNames} has been submitted and is pending confirmation.`,
         "booking",
         bookingData,
       );
@@ -189,7 +190,7 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
       );
 
       // Reset form
-      setSelectedService("");
+      setSelectedServices([]);
       setSelectedStylist("");
       setSelectedDate(undefined);
       setSelectedTime("");
