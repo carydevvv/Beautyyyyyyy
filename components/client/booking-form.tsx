@@ -379,33 +379,41 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
           </div>
 
           {/* Booking Summary */}
-          {selectedServiceData &&
+          {selectedServices.length > 0 &&
             selectedStylistData &&
             selectedDate &&
             selectedTime && (
               <Card className="bg-purple-50 border-purple-200">
                 <CardContent className="p-4">
-                  <h3 className="font-medium mb-2">Booking Summary</h3>
-                  <div className="space-y-1 text-sm">
-                    <p>
-                      <strong>Service:</strong> {selectedServiceData.name}
-                    </p>
-                    <p>
-                      <strong>Stylist:</strong> {selectedStylistData.name}
-                    </p>
-                    <p>
-                      <strong>Date:</strong> {format(selectedDate, "PPP")}
-                    </p>
-                    <p>
-                      <strong>Time:</strong> {selectedTime}
-                    </p>
-                    <p>
-                      <strong>Duration:</strong> {selectedServiceData.duration}{" "}
-                      minutes
-                    </p>
-                    <p>
-                      <strong>Price:</strong> ${selectedServiceData.price}
-                    </p>
+                  <h3 className="font-medium mb-3">Booking Summary</h3>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <p className="font-semibold mb-1">Services:</p>
+                      <div className="ml-2 space-y-1">
+                        {selectedServicesData.map((service) => (
+                          <p key={service.id} className="text-gray-700">
+                            • {service.name} ({service.duration} min) - Ksh{service.price}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="border-t border-purple-200 pt-2 mt-2">
+                      <p>
+                        <strong>Stylist:</strong> {selectedStylistData.name}
+                      </p>
+                      <p>
+                        <strong>Date:</strong> {format(selectedDate, "PPP")}
+                      </p>
+                      <p>
+                        <strong>Time:</strong> {selectedTime}
+                      </p>
+                      <p>
+                        <strong>Total Duration:</strong> {totalDuration} minutes
+                      </p>
+                      <p className="text-base font-bold text-purple-600 mt-2">
+                        <strong>Total Price:</strong> Ksh{totalPrice}
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -415,7 +423,7 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
             type="submit"
             className="w-full"
             disabled={
-              !selectedService ||
+              selectedServices.length === 0 ||
               !selectedStylist ||
               !selectedDate ||
               !selectedTime ||
