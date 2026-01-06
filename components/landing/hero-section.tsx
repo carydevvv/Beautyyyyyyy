@@ -261,30 +261,30 @@ export function HeroSection() {
       </section>
 
       {/* Contact Info */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
             Visit Us Today
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
             <div className="flex flex-col items-center space-y-2">
-              <MapPin className="h-8 w-8 text-purple-600" />
-              <h3 className="font-semibold">Location</h3>
-              <p className="text-gray-600 text-center">
+              <MapPin className="h-6 sm:h-8 w-6 sm:w-8 text-purple-600" />
+              <h3 className="font-semibold text-sm sm:text-base">Location</h3>
+              <p className="text-xs sm:text-sm text-gray-600 text-center">
                 Philadelphia House, Room 8
                 <br />
                 Nairobi, Kenya
               </p>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <Phone className="h-8 w-8 text-purple-600" />
-              <h3 className="font-semibold">Phone</h3>
-              <p className="text-gray-600">+254727796332</p>
+              <Phone className="h-6 sm:h-8 w-6 sm:w-8 text-purple-600" />
+              <h3 className="font-semibold text-sm sm:text-base">Phone</h3>
+              <p className="text-xs sm:text-sm text-gray-600">+254727796332</p>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <Mail className="h-8 w-8 text-purple-600" />
-              <h3 className="font-semibold">Email</h3>
-              <p className="text-gray-600">beautyexpress211@gmail.com</p>
+              <Mail className="h-6 sm:h-8 w-6 sm:w-8 text-purple-600" />
+              <h3 className="font-semibold text-sm sm:text-base">Email</h3>
+              <p className="text-xs sm:text-sm text-gray-600">beautyexpress211@gmail.com</p>
             </div>
           </div>
         </div>
