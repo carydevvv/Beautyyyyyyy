@@ -123,12 +123,24 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
     }
   };
 
-  const selectedServiceData = services.find((s) => s.id === selectedService);
+  const selectedServicesData = services.filter((s) =>
+    selectedServices.includes(s.id),
+  );
   const selectedStylistData = stylists.find((s) => s.id === selectedStylist);
+  const totalPrice = selectedServicesData.reduce((sum, s) => sum + s.price, 0);
+  const totalDuration = selectedServicesData.reduce((sum, s) => sum + s.duration, 0);
+
+  const toggleService = (serviceId: string) => {
+    setSelectedServices((prev) =>
+      prev.includes(serviceId)
+        ? prev.filter((id) => id !== serviceId)
+        : [...prev, serviceId],
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!clientProfile || !selectedDate) return;
+    if (!clientProfile || !selectedDate || selectedServices.length === 0) return;
 
     setLoading(true);
 
@@ -138,17 +150,17 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
         customerEmail: clientProfile.email,
         customerPhone: clientProfile.phone,
         customerId: clientProfile.uid,
-        service: selectedServiceData?.name,
-        serviceId: selectedService,
+        services: selectedServicesData.map((s) => s.name),
+        serviceIds: selectedServices,
         stylist: selectedStylistData?.name,
         stylistId: selectedStylist,
         date: format(selectedDate, "yyyy-MM-dd"),
         time: selectedTime,
         status: "pending",
         notes,
-        price: selectedServiceData?.price,
-        revenue: selectedServiceData?.price, // Add revenue field for admin tracking
-        duration: selectedServiceData?.duration,
+        price: totalPrice,
+        revenue: totalPrice, // Add revenue field for admin tracking
+        duration: totalDuration,
         createdAt: Timestamp.now(),
       };
 
