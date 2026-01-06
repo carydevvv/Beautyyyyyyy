@@ -217,32 +217,44 @@ export function BookingForm({ onBookingComplete }: BookingFormProps) {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Service Selection */}
           <div className="space-y-3">
-            <Label>Select Service</Label>
+            <Label>Select Services (You can choose multiple)</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {services.map((service) => (
                 <Card
                   key={service.id}
                   className={`cursor-pointer transition-all ${
-                    selectedService === service.id
+                    selectedServices.includes(service.id)
                       ? "ring-2 ring-purple-500 bg-purple-50"
                       : "hover:bg-gray-50"
                   }`}
-                  onClick={() => setSelectedService(service.id)}
+                  onClick={() => toggleService(service.id)}
                 >
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start">
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-medium">{service.name}</h3>
                         <p className="text-sm text-gray-500">
                           {service.duration} minutes
                         </p>
                       </div>
-                      <Badge variant="secondary">Ksh{service.price}</Badge>
+                      <div className="flex flex-col items-end gap-2">
+                        <Badge variant="secondary">Ksh{service.price}</Badge>
+                        {selectedServices.includes(service.id) && (
+                          <div className="text-xs text-purple-600 font-semibold">
+                            ✓ Selected
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
+            {selectedServices.length > 0 && (
+              <div className="text-sm text-gray-600 mt-2">
+                {selectedServices.length} service{selectedServices.length !== 1 ? "s" : ""} selected
+              </div>
+            )}
           </div>
 
           {/* Stylist Selection */}
