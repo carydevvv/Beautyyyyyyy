@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { BookingsManager } from "./bookings-manager";
 import { MessagingCenter } from "./messaging-center";
+import { StylistsManager } from "./stylists-manager";
 import {
   Calendar,
   MessageSquare,
