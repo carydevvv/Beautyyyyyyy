@@ -216,6 +216,10 @@ export default function AdminDashboard() {
             <BookingsManager />
           </TabsContent>
 
+          <TabsContent value="stylists">
+            <StylistsManager />
+          </TabsContent>
+
           <TabsContent value="messages">
             <MessagingCenter />
           </TabsContent>
