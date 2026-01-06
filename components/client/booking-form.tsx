@@ -31,25 +31,29 @@ import { toast } from "sonner";
 
 const services = [
   {
-    id: "Tips and gel",
-    name: "Tips and gel Manicure",
+    id: "Gel+artwork",
+    name: "Gel + Artwork",
     duration: 45,
     price: 500,
   },
   {
-    id: "Gel on natural nails",
-    name: "Classic manicure",
+    id: "Gel+artwork-classic",
+    name: "Gel + Artwork (Classic)",
     duration: 60,
     price: 300,
   },
   {
-    id: "Acrylics and nail-art",
-    name: "Acrylics-nail Art",
+    id: "Acrylics",
+    name: "Acrylics",
     duration: 90,
     price: 1500,
   },
-  { id: "Pedicure", name: "Pedicure", duration: 120, price: 800 },
-  { id: "Gum gel", name: "Gum gel", duration: 30, price: 500 },
+  { id: "Pedicure+gel", name: "Pedicure + Gel", duration: 120, price: 800 },
+  { id: "Gum-gel", name: "Gum Gel", duration: 30, price: 800 },
+  { id: "Gum-gel-extension", name: "Gum Gel Extension", duration: 45, price: 1000 },
+  { id: "Pedicure+tips", name: "Pedicure + Tips", duration: 90, price: 1000 },
+  { id: "Nail-builder", name: "Nail Builder", duration: 30, price: 500 },
+  { id: "Nail-removal", name: "Nail Removal", duration: 15, price: 100 },
 ];
 
 const stylists = [
