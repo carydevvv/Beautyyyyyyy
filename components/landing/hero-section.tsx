@@ -196,24 +196,25 @@ export function HeroSection() {
                 </Badge>
               )}
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  {service.name}
-                  <span className="text-purple-600 font-bold">
+                <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-base sm:text-lg">
+                  <span>{service.name}</span>
+                  <span className="text-purple-600 font-bold text-sm sm:text-base">
                     {service.price}
                   </span>
                 </CardTitle>
-                <CardDescription>{service.description}</CardDescription>
+                <CardDescription className="text-xs sm:text-sm">{service.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-1 text-sm text-gray-500">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div className="flex items-center space-x-1 text-xs sm:text-sm text-gray-500">
                     <Clock className="h-4 w-4" />
                     <span>{service.duration}</span>
                   </div>
-                  <Link href="/auth/client/signup">
+                  <Link href="/auth/client/signup" className="w-full sm:w-auto">
                     <Button
                       size="sm"
                       variant="outline"
+                      className="w-full sm:w-auto text-xs sm:text-sm"
                       className="group-hover:bg-purple-50"
                     >
                       Book Now
