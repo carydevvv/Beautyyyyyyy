@@ -109,25 +109,25 @@ export function HeroSection() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
       {/* Header */}
-      <header className="container mx-auto px-4 py-6">
-        <div className="flex justify-between items-center">
+      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        <div className="flex justify-between items-center flex-wrap gap-4">
           <div className="flex items-center space-x-2">
-            <Sparkles className="h-8 w-8 text-purple-600" />
-            <span className="text-2xl font-bold text-gray-900">
+            <Sparkles className="h-6 sm:h-8 w-6 sm:w-8 text-purple-600" />
+            <span className="text-xl sm:text-2xl font-bold text-gray-900">
               BeautyExpress
             </span>
           </div>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2">
             <Link href="/auth/client/signin">
-              <Button variant="outline">Client Sign In</Button>
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">Client Sign In</Button>
             </Link>
             <Link href="/auth/client/signup">
-              <Button className="bg-purple-600 hover:bg-purple-700">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-xs sm:text-sm">
                 Book Now
               </Button>
             </Link>
             <Link href="/auth/admin/signin">
-              <Button variant="ghost" size="sm" className="text-gray-500">
+              <Button variant="ghost" size="sm" className="text-gray-500 text-xs">
                 Admin
               </Button>
             </Link>
