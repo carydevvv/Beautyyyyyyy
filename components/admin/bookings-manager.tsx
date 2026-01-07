@@ -61,7 +61,8 @@ interface Booking {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
-  service: string;
+  service?: string;
+  services?: string[];
   stylist: string;
   date: string;
   time: string;
