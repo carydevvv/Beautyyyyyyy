@@ -35,6 +35,7 @@ export function AdminUtilities() {
       let deletedClients = 0;
       let deletedConversations = 0;
       let deletedMessages = 0;
+      let deletedNotifications = 0;
 
       // Delete all bookings from bot clients
       for (const clientId of BOT_CLIENT_IDS) {
@@ -79,15 +80,31 @@ export function AdminUtilities() {
         }
       }
 
-      // Clear the sample data flag
+      // Delete notifications related to sample data
+      const notificationsQuery = query(collection(db, "notifications"));
+      const notificationsSnapshot = await getDocs(notificationsQuery);
+      for (const notifDoc of notificationsSnapshot.docs) {
+        const notif = notifDoc.data();
+        if (
+          notif.title === "Welcome Admin!" &&
+          notif.message?.includes("Sample data")
+        ) {
+          await deleteDoc(notifDoc.ref);
+          deletedNotifications++;
+        }
+      }
+
+      // Clear the sample data flag and disable future initialization
       localStorage.removeItem("sampleDataInitialized");
+      localStorage.setItem("sampleDataDisabled", "true");
 
       toast.success(
-        `✅ Bot data removed:\n${deletedBookings} bookings\n${deletedClients} clients\n${deletedConversations} conversations\n${deletedMessages} messages`,
-        { duration: 5000 },
+        `✅ Bot data removed:\n${deletedBookings} bookings\n${deletedClients} clients\n${deletedConversations} conversations\n${deletedMessages} messages${deletedNotifications > 0 ? `\n${deletedNotifications} notifications` : ""}\n\nRevenue today will reset to 0.`,
+        { duration: 6000 },
       );
 
       console.log("✅ Bot data cleaned up successfully");
+      console.log(`Deleted: ${deletedBookings} bookings, ${deletedClients} clients, ${deletedConversations} conversations, ${deletedMessages} messages`);
 
       // Refresh after a short delay to show updated metrics
       setTimeout(() => {
