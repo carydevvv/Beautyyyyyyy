@@ -139,7 +139,17 @@ export function AdminUtilities() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Button
+              variant="destructive"
+              onClick={deleteBotData}
+              disabled={loading}
+              className="flex items-center space-x-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              <span>{loading ? "Removing..." : "Remove All Bots"}</span>
+            </Button>
+
             <Button
               variant="outline"
               onClick={clearSampleData}
@@ -172,6 +182,8 @@ export function AdminUtilities() {
           <Alert>
             <AlertTriangle className="h-4 w-4" />
             <AlertDescription>
+              <strong>Remove All Bots:</strong> Permanently deletes all bot bookings, client profiles, conversations, and messages (Sarah Johnson, Maria Garcia, Lisa Chen). Revenue will reset to 0.
+              <br />
               <strong>Reset Sample Data:</strong> Clears the initialization flag
               to allow sample data to be recreated on next load.
               <br />
