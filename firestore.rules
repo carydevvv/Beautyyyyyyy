@@ -24,8 +24,19 @@ service cloud.firestore {
     // Bookings collection - users can read/write their own bookings, admin can read/write all
     match /bookings/{bookingId} {
       allow read, write: if isAdmin();
-      allow read, write: if isAuthenticated() && resource.data.customerId == request.auth.uid;
+      allow read: if isAuthenticated() && resource.data.customerId == request.auth.uid;
       allow create: if isAuthenticated();
+      // Prevent users from modifying their own bookings after creation (especially price/revenue)
+      allow update: if isAuthenticated() && resource.data.customerId == request.auth.uid &&
+        request.resource.data.customerId == resource.data.customerId &&
+        request.resource.data.price == resource.data.price &&
+        request.resource.data.revenue == resource.data.revenue &&
+        request.resource.data.services == resource.data.services &&
+        request.resource.data.serviceIds == resource.data.serviceIds &&
+        request.resource.data.stylist == resource.data.stylist &&
+        request.resource.data.stylistId == resource.data.stylistId &&
+        request.resource.data.date == resource.data.date &&
+        request.resource.data.time == resource.data.time;
     }
     
     // Conversations collection - admin can read/write all, users can read/write their own
