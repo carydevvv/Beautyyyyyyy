@@ -258,6 +258,7 @@ export function useSystemValidation() {
     );
 
     return () => {
+      clearTimeout(midnightTimer);
       unsubscribeBookings();
       unsubscribeConversations();
       unsubscribeClients();
