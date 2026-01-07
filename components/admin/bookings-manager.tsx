@@ -121,7 +121,8 @@ export function BookingsManager() {
           booking.customerEmail
             .toLowerCase()
             .includes(searchTerm.toLowerCase()) ||
-          booking.service.toLowerCase().includes(searchTerm.toLowerCase()),
+          (booking.service?.toLowerCase().includes(searchTerm.toLowerCase()) || false) ||
+          (booking.services?.some((s) => s.toLowerCase().includes(searchTerm.toLowerCase())) || false),
       );
     }
 
