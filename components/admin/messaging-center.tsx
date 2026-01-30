@@ -339,12 +339,20 @@ export function MessagingCenter() {
 
           {/* Booking Panel */}
           {upcomingBooking && (
-            <div className="mt-4 p-4 bg-gradient-to-r from-purple-100 to-indigo-100 border-2 border-purple-400 rounded-lg shadow-md">
+            <div className={`mt-4 p-4 border-2 rounded-lg shadow-md ${
+              upcomingBooking.type === "admin"
+                ? "bg-gradient-to-r from-orange-100 to-amber-100 border-orange-400"
+                : "bg-gradient-to-r from-purple-100 to-indigo-100 border-purple-400"
+            }`}>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <p className="text-xs font-bold text-purple-900 mb-3 uppercase tracking-wide">
-                    📅 LATEST BOOKING
-                  </p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <p className={`text-xs font-bold uppercase tracking-wide ${
+                      upcomingBooking.type === "admin" ? "text-orange-900" : "text-purple-900"
+                    }`}>
+                      📅 {upcomingBooking.type === "admin" ? "IN-SHOP BOOKING 🏪" : "LATEST BOOKING"}
+                    </p>
+                  </div>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2 text-sm font-semibold text-purple-900">
                       <Calendar className="h-5 w-5 text-purple-600" />
