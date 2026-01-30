@@ -74,6 +74,7 @@ export function MessagingCenter() {
   >(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
+  const [upcomingBooking, setUpcomingBooking] = useState<Booking | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
