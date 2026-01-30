@@ -169,6 +169,47 @@ export function BookingsManager() {
     }
   };
 
+  const createAdminBooking = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!adminBookingForm.customerName.trim() || !adminBookingForm.service.trim() ||
+        !adminBookingForm.stylist.trim() || !adminBookingForm.date || !adminBookingForm.time || !adminBookingForm.amount) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "bookings"), {
+        customerName: adminBookingForm.customerName,
+        customerEmail: "", // Empty for in-shop bookings
+        customerPhone: "", // Empty for in-shop bookings
+        service: adminBookingForm.service,
+        stylist: adminBookingForm.stylist,
+        date: adminBookingForm.date,
+        time: adminBookingForm.time,
+        status: "confirmed", // In-shop bookings are confirmed immediately
+        amount: parseFloat(adminBookingForm.amount),
+        type: "admin", // Mark as admin/in-shop booking
+        notes: "In-shop booking",
+        createdAt: new Date(),
+      });
+
+      toast.success(`Booking created for ${adminBookingForm.customerName}`);
+      setAdminBookingForm({
+        customerName: "",
+        service: "",
+        stylist: "",
+        date: "",
+        time: "",
+        amount: "",
+      });
+      setIsAdminBookingDialogOpen(false);
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      toast.error("Failed to create booking");
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
