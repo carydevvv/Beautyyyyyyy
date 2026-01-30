@@ -129,13 +129,28 @@ export function MessagingCenter() {
         orderBy("timestamp", "asc"),
       );
 
-      const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
-        const messagesData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Message[];
-        setMessages(messagesData);
-      });
+      let timeout: NodeJS.Timeout;
+      const unsubscribe = onSnapshot(
+        messagesQuery,
+        (snapshot) => {
+          const messagesData = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as Message[];
+          setMessages(messagesData);
+          clearTimeout(timeout);
+        },
+        (err) => {
+          console.error("Messages listener error:", err);
+          clearTimeout(timeout);
+        },
+      );
+
+      // Set timeout in case listener never responds
+      timeout = setTimeout(() => {
+        console.warn("Messages listener timeout - setting empty array");
+        setMessages([]);
+      }, 5000);
 
       // Reset unread count when selecting conversation
       const selectedConv = conversations.find(
@@ -147,7 +162,10 @@ export function MessagingCenter() {
         }).catch((err) => console.error("Error resetting unread count:", err));
       }
 
-      return unsubscribe;
+      return () => {
+        unsubscribe();
+        clearTimeout(timeout);
+      };
     }
   }, [selectedConversation, conversations]);
 
