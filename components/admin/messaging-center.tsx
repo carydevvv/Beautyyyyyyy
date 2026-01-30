@@ -150,7 +150,6 @@ export function MessagingCenter() {
         const bookingsQuery = query(
           collection(db, "bookings"),
           where("customerEmail", "==", selectedConv.customerEmail),
-          orderBy("date", "asc"),
         );
 
         const unsubscribe = onSnapshot(bookingsQuery, (snapshot) => {
@@ -163,10 +162,12 @@ export function MessagingCenter() {
           const today = new Date();
           today.setHours(0, 0, 0, 0);
 
-          const upcomingBookings = bookingsData.filter((booking) => {
-            const bookingDate = new Date(booking.date);
-            return bookingDate >= today && booking.status !== "cancelled";
-          });
+          const upcomingBookings = bookingsData
+            .filter((booking) => {
+              const bookingDate = new Date(booking.date);
+              return bookingDate >= today && booking.status !== "cancelled";
+            })
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
           if (upcomingBookings.length > 0) {
             setUpcomingBooking(upcomingBookings[0]);
