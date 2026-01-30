@@ -52,6 +52,7 @@ import {
   doc,
   updateDoc,
   type Timestamp,
+  addDoc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { toast } from "sonner";
