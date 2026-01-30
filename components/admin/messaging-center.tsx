@@ -139,6 +139,49 @@ export function MessagingCenter() {
     }
   }, [selectedConversation, conversations]);
 
+  // Fetch upcoming booking for selected customer
+  useEffect(() => {
+    if (selectedConversation) {
+      const selectedConv = conversations.find(
+        (c) => c.id === selectedConversation,
+      );
+
+      if (selectedConv) {
+        const bookingsQuery = query(
+          collection(db, "bookings"),
+          where("customerEmail", "==", selectedConv.customerEmail),
+          orderBy("date", "asc"),
+        );
+
+        const unsubscribe = onSnapshot(bookingsQuery, (snapshot) => {
+          const bookingsData = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as Booking[];
+
+          // Find the next upcoming booking
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          const upcomingBookings = bookingsData.filter((booking) => {
+            const bookingDate = new Date(booking.date);
+            return bookingDate >= today && booking.status !== "cancelled";
+          });
+
+          if (upcomingBookings.length > 0) {
+            setUpcomingBooking(upcomingBookings[0]);
+          } else {
+            setUpcomingBooking(null);
+          }
+        });
+
+        return unsubscribe;
+      }
+    } else {
+      setUpcomingBooking(null);
+    }
+  }, [selectedConversation, conversations]);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
