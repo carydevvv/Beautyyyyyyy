@@ -341,7 +341,7 @@ export function MessagingCenter() {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <p className="text-xs font-bold text-purple-900 mb-3 uppercase tracking-wide">
-                    📅 UPCOMING BOOKING
+                    📅 LATEST BOOKING
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2 text-sm font-semibold text-purple-900">
