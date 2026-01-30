@@ -51,6 +51,21 @@ interface Conversation {
   unreadCount: number;
 }
 
+interface Booking {
+  id: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  service?: string;
+  services?: string[];
+  stylist: string;
+  date: string;
+  time: string;
+  status: "pending" | "confirmed" | "completed" | "cancelled";
+  notes?: string;
+  createdAt: Timestamp;
+}
+
 export function MessagingCenter() {
   const { user } = useAdminAuth();
   const [conversations, setConversations] = useState<Conversation[]>([]);
