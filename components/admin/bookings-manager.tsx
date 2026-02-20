@@ -44,6 +44,7 @@ import {
   XCircle,
   Edit,
   Trash2,
+  Smartphone,
 } from "lucide-react";
 import {
   collection,
@@ -83,6 +84,9 @@ export function BookingsManager() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isMpesaDialogOpen, setIsMpesaDialogOpen] = useState(false);
+  const [mpesaPhoneNumber, setMpesaPhoneNumber] = useState("");
+  const [isProcessingMpesa, setIsProcessingMpesa] = useState(false);
 
   // Admin in-shop booking form state
   const [isAdminBookingDialogOpen, setIsAdminBookingDialogOpen] = useState(false);
@@ -167,6 +171,43 @@ export function BookingsManager() {
     } catch (error) {
       console.error("Error deleting booking:", error);
       toast.error("Failed to delete booking");
+    }
+  };
+
+  const handleMpesaPrompt = async () => {
+    if (!selectedBooking) return;
+
+    setIsProcessingMpesa(true);
+    try {
+      const amount = selectedBooking.amount || (selectedBooking as any).price || 0;
+      if (amount <= 0) {
+        toast.error("Booking amount must be greater than 0");
+        setIsProcessingMpesa(false);
+        return;
+      }
+
+      const response = await fetch("/api/mpesa/stkpush", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phoneNumber: mpesaPhoneNumber,
+          amount: amount,
+          accountRef: `Beautyexpress-${selectedBooking.customerName.slice(0, 10)}`,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.ResponseCode === "0") {
+        toast.success("M-Pesa STK Push sent successfully!");
+        setIsMpesaDialogOpen(false);
+      } else {
+        toast.error(`M-Pesa error: ${data.CustomerMessage || "Failed to send prompt"}`);
+      }
+    } catch (error) {
+      console.error("M-Pesa error:", error);
+      toast.error("An error occurred while sending the M-Pesa prompt");
+    } finally {
+      setIsProcessingMpesa(false);
     }
   };
 
@@ -551,6 +592,55 @@ export function BookingsManager() {
                               )}
                             </div>
                           )}
+                        </DialogContent>
+                      </Dialog>
+                      <Dialog
+                        open={isMpesaDialogOpen}
+                        onOpenChange={setIsMpesaDialogOpen}
+                      >
+                        <DialogTrigger asChild>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="bg-green-50 text-green-600 hover:bg-green-100 border-green-200"
+                            onClick={() => {
+                              setSelectedBooking(booking);
+                              setMpesaPhoneNumber(booking.customerPhone || "0707444525");
+                            }}
+                          >
+                            <Smartphone className="h-4 w-4 mr-1" />
+                            M-Pesa
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Send M-Pesa STK Push</DialogTitle>
+                            <DialogDescription>
+                              This will send a payment prompt to the customer's phone
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-4 py-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="mpesa-phone">Customer Phone Number</Label>
+                              <Input
+                                id="mpesa-phone"
+                                placeholder="07xxxxxxxx"
+                                value={mpesaPhoneNumber}
+                                onChange={(e) => setMpesaPhoneNumber(e.target.value)}
+                              />
+                            </div>
+                            <div className="p-3 bg-gray-50 rounded-md border text-sm">
+                              <p><strong>Customer:</strong> {selectedBooking?.customerName}</p>
+                              <p><strong>Amount:</strong> Ksh {selectedBooking?.amount || (selectedBooking as any)?.price || 0}</p>
+                            </div>
+                            <Button
+                              className="w-full bg-green-600 hover:bg-green-700"
+                              onClick={handleMpesaPrompt}
+                              disabled={isProcessingMpesa}
+                            >
+                              {isProcessingMpesa ? "Sending Prompt..." : "Send Payment Prompt"}
+                            </Button>
+                          </div>
                         </DialogContent>
                       </Dialog>
                       <Button
