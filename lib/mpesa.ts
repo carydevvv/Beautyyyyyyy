@@ -17,6 +17,11 @@ export async function getMpesaToken() {
     }
   );
 
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`M-Pesa token generation failed: ${response.status} ${errorText}`);
+  }
+
   const data = await response.json();
   return data.access_token;
 }
@@ -62,6 +67,13 @@ export async function initiateStkPush(phoneNumber: string, amount: number, accou
       body: JSON.stringify(payload),
     }
   );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("M-Pesa API Response Body:", errorText);
+    console.error("M-Pesa API Payload:", JSON.stringify(payload, null, 2));
+    throw new Error(`M-Pesa STK push initiation failed: ${response.status} ${errorText}`);
+  }
 
   return await response.json();
 }

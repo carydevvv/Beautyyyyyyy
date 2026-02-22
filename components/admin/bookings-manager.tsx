@@ -78,6 +78,9 @@ interface Booking {
 }
 
 export function BookingsManager() {
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isMpesaDialogOpen, setIsMpesaDialogOpen] = useState(false);
@@ -186,7 +189,7 @@ export function BookingsManager() {
         body: JSON.stringify({
           phoneNumber: mpesaPhoneNumber,
           amount: amount,
-          accountRef: `Beautyexpress-${selectedBooking.customerName.slice(0, 10)}`,
+          accountRef: `BX_${selectedBooking.customerName.slice(0, 10).replace(/[^a-zA-Z0-9]/g, "")}`,
         }),
       });
 

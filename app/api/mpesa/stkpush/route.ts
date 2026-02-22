@@ -13,10 +13,11 @@ export async function POST(request: Request) {
     }
 
     const result = await initiateStkPush(phoneNumber, amount, accountRef);
+    console.log("M-Pesa STK push result:", result);
 
     return NextResponse.json(result);
   } catch (error: any) {
-    console.error("M-Pesa API Route Error:", error);
+    console.error("M-Pesa API Route Error Details:", error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
       { status: 500 }
