@@ -10,7 +10,7 @@ import {
 import { auth } from "@/lib/firebase";
 
 const ADMIN_WHITELIST = {
-  uid: "VJdxemjpYTfR3TAfAQDmZ9ucjxB2",
+  uid: "FH4s7xpmnMbSmsXqacWjaVL76x12",
   email: "nailtech@gmail.com",
 } as const;
 
