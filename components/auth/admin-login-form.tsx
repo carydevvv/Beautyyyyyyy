@@ -39,7 +39,7 @@ export default function AdminLoginForm() {
           <div className="flex justify-center mb-4">
             <Crown className="h-12 w-12 text-purple-600" />
           </div>
-          <CardTitle className="text-2xl font-bold text-purple-800">BeautyExpress Admin</CardTitle>
+          <CardTitle className="text-2xl font-bold text-purple-800">NailTech Admin</CardTitle>
           <CardDescription>Sign in to access the admin dashboard</CardDescription>
         </CardHeader>
         <CardContent>
@@ -51,7 +51,7 @@ export default function AdminLoginForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@beautyexpress.com"
+                placeholder="admin@nailtech.com"
                 required
               />
             </div>

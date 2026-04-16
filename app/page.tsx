@@ -40,7 +40,7 @@ export default function HomePage() {
             <Sparkles className="h-16 w-16 text-purple-600 animate-pulse" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            BeautyExpress
+            NailTech
           </h1>
           <div className="flex items-center justify-center space-x-2">
             <Loader2 className="h-5 w-5 animate-spin text-purple-600" />
@@ -63,7 +63,7 @@ export default function HomePage() {
         <div className="flex justify-center mb-6">
           <Sparkles className="h-16 w-16 text-purple-600" />
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">BeautyExpress</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">NailTech</h1>
         <p className="text-gray-600">Redirecting...</p>
       </div>
     </div>

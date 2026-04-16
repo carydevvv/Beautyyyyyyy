@@ -23,7 +23,7 @@ export default function AuthSelection() {
             </div>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to BeautyExpress
+            Welcome to NailTech
           </h1>
           <p className="text-xl text-gray-600">
             Choose how you'd like to access our platform
@@ -138,10 +138,10 @@ export default function AuthSelection() {
           <p className="text-gray-500">
             Need help? Contact us at{" "}
             <a
-              href="mailto:support@beautyexpress.com"
+              href="mailto:support@nailtech.com"
               className="text-purple-600 hover:underline"
             >
-              support@beautyexpress.com
+              support@nailtech.com
             </a>
           </p>
         </div>

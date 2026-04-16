@@ -114,7 +114,7 @@ export function HeroSection() {
           <div className="flex items-center space-x-2">
             <Sparkles className="h-6 sm:h-8 w-6 sm:w-8 text-purple-600" />
             <span className="text-xl sm:text-2xl font-bold text-gray-900">
-              BeautyExpress
+              NailTech
             </span>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -284,7 +284,7 @@ export function HeroSection() {
             <div className="flex flex-col items-center space-y-2">
               <Mail className="h-6 sm:h-8 w-6 sm:w-8 text-purple-600" />
               <h3 className="font-semibold text-sm sm:text-base">Email</h3>
-              <p className="text-xs sm:text-sm text-gray-600">beautyexpress211@gmail.com</p>
+              <p className="text-xs sm:text-sm text-gray-600">support@nailtech.com</p>
             </div>
           </div>
         </div>
@@ -294,10 +294,10 @@ export function HeroSection() {
       <footer className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-gray-600">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4">
           <Sparkles className="h-6 w-6 text-purple-600" />
-          <span className="text-lg sm:text-xl font-bold text-gray-900">BeautyExpress</span>
+          <span className="text-lg sm:text-xl font-bold text-gray-900">NailTech</span>
         </div>
         <p className="text-sm sm:text-base">
-          &copy; 2025 BeautyExpress. All rights reserved. Crafted with ❤️ for
+          &copy; 2025 NailTech. All rights reserved. Crafted with ❤️ for
           beautiful nails.
         </p>
         <p className="mt-2 text-xs sm:text-sm">Santos*Kerosi</p>
