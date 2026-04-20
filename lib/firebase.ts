@@ -17,14 +17,19 @@ const firebaseConfig = {
 let app;
 try {
   app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-  console.log("Firebase initialized successfully");
 } catch (error) {
   console.error("Firebase initialization error:", error);
   throw error;
 }
 
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+// Use initializeFirestore with settings for better connectivity in restricted environments
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager(),
+  }),
+});
 
 // Only initialize analytics on the client side
 export const analytics =
