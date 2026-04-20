@@ -9,7 +9,7 @@ import ErrorBoundary from "@/components/error-boundary";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BeautyExpress - Premium Nail Spa",
+  title: "NailTech - Premium Nail Spa",
   description: "Book your perfect nail appointment with our expert stylists",
   generator: "v0.dev",
 };

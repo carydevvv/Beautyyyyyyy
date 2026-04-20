@@ -59,7 +59,7 @@ export default function AdminSignInForm() {
               Admin Sign In
             </CardTitle>
             <CardDescription>
-              Access the BeautyExpress admin dashboard
+              Access the NailTech admin dashboard
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -71,7 +71,7 @@ export default function AdminSignInForm() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@beautyexpress.com"
+                  placeholder="admin@nailtech.com"
                   required
                 />
               </div>

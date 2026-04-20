@@ -157,7 +157,7 @@ export function ClientMessaging({
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
           <MessageSquare className="h-5 w-5" />
-          <span>Chat with BeautyExpress</span>
+          <span>Chat with NailTech</span>
         </CardTitle>
         <CardDescription>
           Get help with your appointments and ask questions

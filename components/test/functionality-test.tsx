@@ -429,7 +429,7 @@ export function FunctionalityTest() {
             <span>Comprehensive Functionality Test</span>
           </CardTitle>
           <CardDescription>
-            Complete test of all BeautyExpress features including real-time sync
+            Complete test of all NailTech features including real-time sync
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

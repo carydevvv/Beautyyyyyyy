@@ -1,16 +1,16 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
+import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAabN5AygCwFwXEPVc67fbneJWgVZ-38UA",
-  authDomain: "beautyexpres-2f9c5.firebaseapp.com",
-  projectId: "beautyexpres-2f9c5",
-  storageBucket: "beautyexpres-2f9c5.firebasestorage.app",
-  messagingSenderId: "5589209811",
-  appId: "1:5589209811:web:849ef30cd180b1c41a7a26",
-  measurementId: "G-GKSNVS1F6M",
+  apiKey: "AIzaSyAfGI8P4Wqv1kmbhQzauq1Nv_Zu6hZ4tUk",
+  authDomain: "nailtechsalon-e8617.firebaseapp.com",
+  projectId: "nailtechsalon-e8617",
+  storageBucket: "nailtechsalon-e8617.firebasestorage.app",
+  messagingSenderId: "272237899220",
+  appId: "1:272237899220:web:26d0048fd85b599516fa41",
+  measurementId: "G-L9DZV0GTD4",
 };
 
 // Initialize Firebase only if it hasn't been initialized already
@@ -34,5 +34,16 @@ export const db = initializeFirestore(app, {
 // Only initialize analytics on the client side
 export const analytics =
   typeof window !== "undefined" ? getAnalytics(app) : null;
+
+// Enable offline persistence
+if (typeof window !== "undefined") {
+  enableIndexedDbPersistence(db).catch((error) => {
+    if (error.code === "failed-precondition") {
+      console.warn("Multiple tabs open, persistence disabled");
+    } else if (error.code === "unimplemented") {
+      console.warn("Browser does not support persistence");
+    }
+  });
+}
 
 export default app;
