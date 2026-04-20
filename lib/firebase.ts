@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from "firebase/app";
-import { getAuth, connectAuthEmulator } from "firebase/auth";
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -30,12 +30,14 @@ export const db = getFirestore(app);
 export const analytics =
   typeof window !== "undefined" ? getAnalytics(app) : null;
 
-// Enable persistence for offline support
+// Enable offline persistence
 if (typeof window !== "undefined") {
-  import("firebase/firestore").then(({ enableNetwork }) => {
-    enableNetwork(db).catch((error) => {
-      console.error("Failed to enable Firestore network:", error);
-    });
+  enableIndexedDbPersistence(db).catch((error) => {
+    if (error.code === "failed-precondition") {
+      console.warn("Multiple tabs open, persistence disabled");
+    } else if (error.code === "unimplemented") {
+      console.warn("Browser does not support persistence");
+    }
   });
 }
 
